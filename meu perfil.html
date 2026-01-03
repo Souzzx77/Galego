@@ -6,118 +6,95 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+body{
+    background:#0f0f0f;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-body {
-    background: #0f0f0f;
-    color: #fff;
+header{
+    padding:20px;
+    background:#111;
+    border-bottom:2px solid #e63946;
 }
 
-header {
-    padding: 20px;
-    background: #111;
-    border-bottom: 2px solid #e63946;
+header a{
+    color:#e63946;
+    text-decoration:none;
+    font-weight:bold;
 }
 
-header a {
-    color: #e63946;
-    text-decoration: none;
-    font-weight: bold;
+.container{
+    max-width:500px;
+    margin:40px auto;
+    background:#111;
+    padding:35px;
+    border-radius:10px;
+    border:1px solid #222;
 }
 
-.container {
-    max-width: 520px;
-    margin: 50px auto;
-    background: #111;
-    padding: 40px;
-    border-radius: 10px;
-    border: 1px solid #222;
+h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#e63946;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #e63946;
+.foto{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-/* FOTO */
-.foto-perfil {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px;
+.foto img{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    border:3px solid #e63946;
+    object-fit:cover;
+    margin-bottom:10px;
 }
 
-.foto-perfil img {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #e63946;
-    margin-bottom: 12px;
+.foto label{
+    display:inline-block;
+    padding:10px 15px;
+    background:#1c1c1c;
+    border:1px solid #333;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:13px;
 }
 
-/* BOTÃO FOTO */
-.upload-btn {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
+.foto input{
+    display:none;
 }
 
-.upload-btn button {
-    background: #1c1c1c;
-    color: #fff;
-    padding: 10px 16px;
-    border: 1px solid #333;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
+label{
+    font-size:13px;
+    color:#aaa;
 }
 
-.upload-btn button:hover {
-    background: #262626;
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0 18px;
+    background:#1c1c1c;
+    border:1px solid #222;
+    border-radius:6px;
+    color:#fff;
 }
 
-.upload-btn input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
+button{
+    width:100%;
+    padding:14px;
+    background:#e63946;
+    border:none;
+    border-radius:6px;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-label {
-    font-size: 13px;
-    color: #aaa;
-}
-
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0 18px;
-    background: #1c1c1c;
-    border: 1px solid #222;
-    border-radius: 6px;
-    color: #fff;
-}
-
-button.salvar {
-    width: 100%;
-    padding: 14px;
-    background: #e63946;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    color: #fff;
-    cursor: pointer;
-}
-
-button.salvar:hover {
-    background: #ff4d5a;
+button:hover{
+    background:#ff4d5a;
 }
 </style>
 </head>
@@ -131,59 +108,41 @@ button.salvar:hover {
 <div class="container">
 <h2>Meu Perfil</h2>
 
-<div class="foto-perfil">
-    <img id="previewFoto" src="https://via.placeholder.com/130">
-    <div class="upload-btn">
-        <button>Escolher foto</button>
+<div class="foto">
+    <img id="preview" src="https://via.placeholder.com/130">
+    <br>
+    <label>
+        Escolher foto
         <input type="file" id="foto" accept="image/*">
-    </div>
+    </label>
 </div>
 
-<form id="perfilForm">
+<form id="form">
     <label>Nome</label>
     <input type="text" id="nome">
 
     <label>Email</label>
     <input type="email" id="email">
 
-    <button class="salvar" type="submit">Salvar alterações</button>
+    <button type="submit">Salvar</button>
 </form>
 </div>
 
-<!-- FIREBASE -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyANsCPOUh_7A_7w3FVUILdyGxdO9wotPRk",
-  authDomain: "galego-site.firebaseapp.com",
-  projectId: "galego-site",
-  storageBucket: "galego-site.firebasestorage.app",
-  messagingSenderId: "647885603620",
-  appId: "1:647885603620:web:e929d7fc2e788e122369b1"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage(app);
+import { db, storage } from "./firebase.js";
+import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
 const fotoInput = document.getElementById("foto");
-const preview = document.getElementById("previewFoto");
+const preview = document.getElementById("preview");
+let fotoArquivo = null;
 
-let fotoSelecionada = null;
-
-// PREVIEW
 fotoInput.addEventListener("change", () => {
-    fotoSelecionada = fotoInput.files[0];
-    if (fotoSelecionada) {
-        preview.src = URL.createObjectURL(fotoSelecionada);
-    }
+    fotoArquivo = fotoInput.files[0];
+    if (fotoArquivo) preview.src = URL.createObjectURL(fotoArquivo);
 });
 
-// SALVAR PERFIL
-document.getElementById("perfilForm").addEventListener("submit", async (e) => {
+document.getElementById("form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const nome = document.getElementById("nome").value;
@@ -191,9 +150,9 @@ document.getElementById("perfilForm").addEventListener("submit", async (e) => {
 
     let fotoURL = preview.src;
 
-    if (fotoSelecionada) {
+    if (fotoArquivo) {
         const fotoRef = ref(storage, "perfil/foto.jpg");
-        await uploadBytes(fotoRef, fotoSelecionada);
+        await uploadBytes(fotoRef, fotoArquivo);
         fotoURL = await getDownloadURL(fotoRef);
     }
 
@@ -204,19 +163,16 @@ document.getElementById("perfilForm").addEventListener("submit", async (e) => {
         atualizadoEm: new Date().toISOString()
     });
 
-    alert("Perfil salvo com sucesso!");
+    alert("Perfil salvo com sucesso");
 });
 
-// CARREGAR PERFIL
-async function carregarPerfil() {
-    const perfilRef = doc(db, "perfil", "principal");
-    const snap = await getDoc(perfilRef);
-
-    if (snap.exists()) {
-        const dados = snap.data();
-        document.getElementById("nome").value = dados.nome || "";
-        document.getElementById("email").value = dados.email || "";
-        if (dados.fotoURL) preview.src = dados.fotoURL;
+async function carregarPerfil(){
+    const snap = await getDoc(doc(db,"perfil","principal"));
+    if(snap.exists()){
+        const d = snap.data();
+        document.getElementById("nome").value = d.nome || "";
+        document.getElementById("email").value = d.email || "";
+        if(d.fotoURL) preview.src = d.fotoURL;
     }
 }
 
