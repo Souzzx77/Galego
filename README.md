@@ -1,0 +1,18 @@
+IAMD - SEDE
+Site dedicado a Igreja Apostólica Manancial de Deus
+com intuiito de alcançar vidas diariamente e glorificar
+o nome do Senhor pelas redes sociais.🙏🏽🔥
+
+Localização:
+📍 
+
+Estrutura do projeto: 💻 -HTML + JS
+
+index.html — página inicial - login do site
+style.css — estilos visuais
+script.js — interações e funcionalidades
+Programação do site ainda em andamento.⚠️
+
+Autor: Vinicios Santana
+IG: @souzzx_77
+📧Email: Viniciossantanazr@gmail.com
