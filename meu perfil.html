@@ -19,7 +19,6 @@
             min-height: 100vh;
         }
 
-        /* HEADER */
         header {
             background: #111;
             padding: 20px;
@@ -30,10 +29,8 @@
             color: #e63946;
             text-decoration: none;
             font-weight: bold;
-            font-size: 14px;
         }
 
-        /* CONTAINER */
         .perfil-container {
             max-width: 520px;
             margin: 60px auto;
@@ -41,17 +38,14 @@
             padding: 40px;
             border-radius: 10px;
             border: 1px solid #222;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
 
-        .perfil-container h2 {
+        h2 {
             text-align: center;
             margin-bottom: 30px;
             color: #e63946;
-            letter-spacing: 1px;
         }
 
-        /* FORM */
         label {
             display: block;
             margin-bottom: 6px;
@@ -62,51 +56,44 @@
         input {
             width: 100%;
             padding: 13px;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             background: #1c1c1c;
             border: 1px solid #222;
             border-radius: 6px;
             color: #fff;
-            outline: none;
-            transition: 0.3s;
         }
 
         input:focus {
             border-color: #e63946;
+            outline: none;
         }
 
         input:disabled {
             opacity: 0.6;
-            cursor: not-allowed;
         }
 
-        /* BOTÃO */
-        button {
+        .btn-salvar {
             width: 100%;
             padding: 14px;
             background: #e63946;
             border: none;
             border-radius: 6px;
-            font-size: 15px;
             font-weight: bold;
             color: #fff;
             cursor: pointer;
-            transition: 0.3s;
         }
 
-        button:hover {
+        .btn-salvar:hover {
             background: #ff4d5a;
-            transform: translateY(-2px);
         }
 
-        /* FOOTER */
         footer {
             text-align: center;
             padding: 20px;
             font-size: 12px;
             color: #666;
-            border-top: 1px solid #222;
             margin-top: 60px;
+            border-top: 1px solid #222;
         }
     </style>
 </head>
@@ -120,26 +107,70 @@
 <div class="perfil-container">
     <h2>Meu Perfil</h2>
 
-    <form>
+    <form id="perfilForm">
         <label>Nome de usuário</label>
-        <input type="text" value="Usuario123">
+        <input type="text" id="nome" placeholder="Seu nome">
 
         <label>Email</label>
-        <input type="email" value="usuario@email.com">
+        <input type="email" id="email" placeholder="seu@email.com">
 
         <label>Nível</label>
         <input type="text" value="Iniciante" disabled>
 
-        <label>Data de cadastro</label>
-        <input type="text" value="01/01/2026" disabled>
-
-        <button type="submit">Salvar alterações</button>
+        <button type="submit" class="btn-salvar">
+            Salvar alterações
+        </button>
     </form>
 </div>
 
 <footer>
-    Muay Thai © 2026 — Disciplina também é organização.
+    Muay Thai © 2026 — Treino sério, sistema sério.
 </footer>
+
+<!-- FIREBASE -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyANsCPOUh_7A_7w3FVUILdyGxdO9wotPRk",
+        authDomain: "galego-site.firebaseapp.com",
+        projectId: "galego-site",
+        storageBucket: "galego-site.firebasestorage.app",
+        messagingSenderId: "647885603620",
+        appId: "1:647885603620:web:e929d7fc2e788e122369b1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("perfilForm");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+
+        if (!nome || !email) {
+            alert("Preencha todos os campos.");
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, "usuarios"), {
+                nome: nome,
+                email: email,
+                atualizadoEm: new Date().toISOString()
+            });
+
+            alert("Perfil salvo com sucesso!");
+        } catch (error) {
+            console.error(error);
+            alert("Erro ao salvar perfil.");
+        }
+    });
+</script>
 
 </body>
 </html>
