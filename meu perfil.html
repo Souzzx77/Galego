@@ -1,101 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Muay Thai | Meu Perfil</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Meu Perfil</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-        body {
-            background: #0f0f0f;
-            color: #fff;
-            min-height: 100vh;
-        }
+body {
+    background: #0f0f0f;
+    color: #fff;
+}
 
-        header {
-            background: #111;
-            padding: 20px;
-            border-bottom: 2px solid #e63946;
-        }
+header {
+    padding: 20px;
+    background: #111;
+    border-bottom: 2px solid #e63946;
+}
 
-        header a {
-            color: #e63946;
-            text-decoration: none;
-            font-weight: bold;
-        }
+header a {
+    color: #e63946;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        .perfil-container {
-            max-width: 520px;
-            margin: 60px auto;
-            background: #111;
-            padding: 40px;
-            border-radius: 10px;
-            border: 1px solid #222;
-        }
+.container {
+    max-width: 520px;
+    margin: 50px auto;
+    background: #111;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid #222;
+}
 
-        h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #e63946;
-        }
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #e63946;
+}
 
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 13px;
-            color: #aaa;
-        }
+.foto-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
 
-        input {
-            width: 100%;
-            padding: 13px;
-            margin-bottom: 20px;
-            background: #1c1c1c;
-            border: 1px solid #222;
-            border-radius: 6px;
-            color: #fff;
-        }
+.foto-perfil img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e63946;
+    margin-bottom: 10px;
+}
 
-        input:focus {
-            border-color: #e63946;
-            outline: none;
-        }
+.foto-perfil input {
+    font-size: 13px;
+}
 
-        input:disabled {
-            opacity: 0.6;
-        }
+label {
+    font-size: 13px;
+    color: #aaa;
+}
 
-        .btn-salvar {
-            width: 100%;
-            padding: 14px;
-            background: #e63946;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            color: #fff;
-            cursor: pointer;
-        }
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 18px;
+    background: #1c1c1c;
+    border: 1px solid #222;
+    border-radius: 6px;
+    color: #fff;
+}
 
-        .btn-salvar:hover {
-            background: #ff4d5a;
-        }
+button {
+    width: 100%;
+    padding: 14px;
+    background: #e63946;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: #666;
-            margin-top: 60px;
-            border-top: 1px solid #222;
-        }
-    </style>
+button:hover {
+    background: #ff4d5a;
+}
+</style>
 </head>
 
 <body>
@@ -104,72 +103,76 @@
     <a href="inicio.html">← Voltar</a>
 </header>
 
-<div class="perfil-container">
-    <h2>Meu Perfil</h2>
+<div class="container">
+<h2>Meu Perfil</h2>
 
-    <form id="perfilForm">
-        <label>Nome de usuário</label>
-        <input type="text" id="nome" placeholder="Seu nome">
-
-        <label>Email</label>
-        <input type="email" id="email" placeholder="seu@email.com">
-
-        <label>Nível</label>
-        <input type="text" value="Iniciante" disabled>
-
-        <button type="submit" class="btn-salvar">
-            Salvar alterações
-        </button>
-    </form>
+<div class="foto-perfil">
+    <img id="previewFoto" src="https://via.placeholder.com/120">
+    <input type="file" id="foto" accept="image/*">
 </div>
 
-<footer>
-    Muay Thai © 2026 — Treino sério, sistema sério.
-</footer>
+<form id="perfilForm">
+    <label>Nome</label>
+    <input type="text" id="nome" required>
+
+    <label>Email</label>
+    <input type="email" id="email" required>
+
+    <button type="submit">Salvar alterações</button>
+</form>
+</div>
 
 <!-- FIREBASE -->
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyANsCPOUh_7A_7w3FVUILdyGxdO9wotPRk",
-        authDomain: "galego-site.firebaseapp.com",
-        projectId: "galego-site",
-        storageBucket: "galego-site.firebasestorage.app",
-        messagingSenderId: "647885603620",
-        appId: "1:647885603620:web:e929d7fc2e788e122369b1"
-    };
+const firebaseConfig = {
+  apiKey: "AIzaSyANsCPOUh_7A_7w3FVUILdyGxdO9wotPRk",
+  authDomain: "galego-site.firebaseapp.com",
+  projectId: "galego-site",
+  storageBucket: "galego-site.firebasestorage.app",
+  messagingSenderId: "647885603620",
+  appId: "1:647885603620:web:e929d7fc2e788e122369b1"
+};
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
-    const form = document.getElementById("perfilForm");
+const fotoInput = document.getElementById("foto");
+const preview = document.getElementById("previewFoto");
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+fotoInput.addEventListener("change", () => {
+    const file = fotoInput.files[0];
+    if (file) preview.src = URL.createObjectURL(file);
+});
 
-        const nome = document.getElementById("nome").value;
-        const email = document.getElementById("email").value;
+document.getElementById("perfilForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-        if (!nome || !email) {
-            alert("Preencha todos os campos.");
-            return;
-        }
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const foto = fotoInput.files[0];
 
-        try {
-            await addDoc(collection(db, "usuarios"), {
-                nome: nome,
-                email: email,
-                atualizadoEm: new Date().toISOString()
-            });
+    let fotoURL = "";
 
-            alert("Perfil salvo com sucesso!");
-        } catch (error) {
-            console.error(error);
-            alert("Erro ao salvar perfil.");
-        }
+    if (foto) {
+        const fotoRef = ref(storage, `fotos/${Date.now()}_${foto.name}`);
+        await uploadBytes(fotoRef, foto);
+        fotoURL = await getDownloadURL(fotoRef);
+    }
+
+    await addDoc(collection(db, "usuarios"), {
+        nome,
+        email,
+        fotoURL,
+        atualizadoEm: new Date().toISOString()
     });
+
+    alert("Perfil salvo com sucesso!");
+});
 </script>
 
 </body>
