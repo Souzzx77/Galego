@@ -19,6 +19,7 @@
             min-height: 100vh;
         }
 
+        /* HEADER */
         header {
             background: #111;
             padding: 20px;
@@ -45,6 +46,7 @@
             color: #e63946;
         }
 
+        /* HERO */
         .hero {
             padding: 60px 20px;
             text-align: center;
@@ -63,6 +65,7 @@
             font-size: 16px;
         }
 
+        /* CARDS */
         .content {
             padding: 40px 20px;
             display: grid;
@@ -96,6 +99,57 @@
             line-height: 1.6;
         }
 
+        /* PERFIL */
+        .perfil {
+            padding: 50px 20px;
+            background: #111;
+            border-top: 2px solid #e63946;
+            text-align: center;
+        }
+
+        .perfil h2 {
+            margin-bottom: 30px;
+            color: #e63946;
+            letter-spacing: 1px;
+        }
+
+        .perfil-card {
+            max-width: 420px;
+            margin: auto;
+            background: #0f0f0f;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #222;
+            text-align: left;
+        }
+
+        .perfil-card p {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .progresso span {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        .barra {
+            width: 100%;
+            height: 10px;
+            background: #222;
+            border-radius: 5px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .barra-preenchida {
+            width: 35%;
+            height: 100%;
+            background: #e63946;
+        }
+
+        /* FOOTER */
         footer {
             text-align: center;
             padding: 20px;
@@ -114,7 +168,7 @@
         <a href="#">Início</a>
         <a href="#">Treinos</a>
         <a href="#">Técnicas</a>
-        <a href="#">Contato</a>
+        <a href="#perfil">Perfil</a>
     </nav>
 </header>
 
@@ -149,6 +203,23 @@
             O respeito vem antes do golpe.  
             Quem ignora isso, não dura no ringue.
         </p>
+    </div>
+</section>
+
+<section class="perfil" id="perfil">
+    <h2>Perfil do Guerreiro</h2>
+
+    <div class="perfil-card">
+        <p><strong>Nome:</strong> Usuário</p>
+        <p><strong>Email:</strong> usuario@email.com</p>
+        <p><strong>Nível:</strong> Iniciante</p>
+
+        <div class="progresso">
+            <span>Progresso no treino</span>
+            <div class="barra">
+                <div class="barra-preenchida"></div>
+            </div>
+        </div>
     </div>
 </section>
 
