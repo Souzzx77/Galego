@@ -46,19 +46,27 @@
             color: #e63946;
         }
 
-        .perfil-item {
-            margin-bottom: 20px;
-        }
-
-        .perfil-item span {
+        label {
             display: block;
+            margin-bottom: 6px;
             font-size: 13px;
             color: #aaa;
         }
 
-        .perfil-item strong {
-            font-size: 15px;
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #1c1c1c;
+            border: none;
+            border-radius: 5px;
             color: #fff;
+            outline: none;
+        }
+
+        input:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         footer {
@@ -81,25 +89,19 @@
 <div class="perfil-container">
     <h2>Meu Perfil</h2>
 
-    <div class="perfil-item">
-        <span>Nome</span>
-        <input type="text" placeholder="Usuario" required>
-    </div>
+    <form>
+        <label>Nome de usuário</label>
+        <input type="text" value="Usuario123">
 
-    <div class="perfil-item">
-        <span>Email</span>
-        <strong>usuario@email.com</strong>
-    </div>
+        <label>Email</label>
+        <input type="email" value="usuario@email.com">
 
-    <div class="perfil-item">
-        <span>Nível</span>
-        <strong>Iniciante</strong>
-    </div>
+        <label>Nível</label>
+        <input type="text" value="Iniciante" disabled>
 
-    <div class="perfil-item">
-        <span>Data de cadastro</span>
-        <strong>01/01/2026</strong>
-    </div>
+        <label>Data de cadastro</label>
+        <input type="text" value="01/01/2026" disabled>
+    </form>
 </div>
 
 <footer>
