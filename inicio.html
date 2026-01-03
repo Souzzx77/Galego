@@ -1,227 +1,160 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Muay Thai | Início</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Muay Thai | Início</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-        body {
-            background: #0f0f0f;
-            color: #fff;
-            min-height: 100vh;
-        }
+body {
+    background: #0f0f0f;
+    color: #fff;
+}
 
-        /* HEADER */
-        header {
-            background: #111;
-            padding: 20px;
-            border-bottom: 2px solid #e63946;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* HEADER */
+header {
+    background: #111;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e63946;
+}
 
-        header h1 {
-            color: #e63946;
-            letter-spacing: 2px;
-        }
+header h1 {
+    font-size: 18px;
+    color: #e63946;
+}
 
-        nav {
-            display: flex;
-            align-items: center;
-        }
+/* PERFIL */
+.perfil {
+    position: relative;
+    cursor: pointer;
+}
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin-right: 20px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
+.perfil img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e63946;
+}
 
-        nav a:hover {
-            color: #e63946;
-        }
+/* MENU PERFIL */
+.menu-perfil {
+    position: absolute;
+    right: 0;
+    top: 55px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 6px;
+    display: none;
+    min-width: 160px;
+    z-index: 10;
+}
 
-        /* PERFIL TOPO */
-        .perfil-topo {
-            position: relative;
-        }
+.menu-perfil a {
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+}
 
-        .avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: #e63946;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            cursor: pointer;
-            user-select: none;
-        }
+.menu-perfil a:hover {
+    background: #1c1c1c;
+}
 
-        .menu-perfil {
-            position: absolute;
-            right: 0;
-            top: 50px;
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 6px;
-            width: 160px;
-            display: none;
-            flex-direction: column;
-            z-index: 10;
-        }
+/* CONTEÚDO */
+main {
+    padding: 40px 25px;
+}
 
-        .menu-perfil a {
-            padding: 12px;
-            font-size: 14px;
-            color: #ccc;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .menu-perfil a:hover {
-            background: #1c1c1c;
-            color: #e63946;
-        }
-
-        .perfil-topo:hover .menu-perfil {
-            display: flex;
-        }
-
-        /* HERO */
-        .hero {
-            padding: 60px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #111, #1c1c1c);
-        }
-
-        .hero h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            color: #aaa;
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 16px;
-        }
-
-        /* CARDS */
-        .content {
-            padding: 40px 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .card {
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 8px;
-            padding: 25px;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            border-color: #e63946;
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: #e63946;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            font-size: 14px;
-            color: #ccc;
-            line-height: 1.6;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: #666;
-            border-top: 1px solid #222;
-        }
-    </style>
+.card {
+    background: #111;
+    border: 1px solid #222;
+    padding: 25px;
+    border-radius: 8px;
+    max-width: 400px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>MUAY THAI</h1>
+    <h1>Muay Thai</h1>
 
-    <nav>
-        <a href="#">Início</a>
-        <a href="#">Treinos</a>
-        <a href="#">Técnicas</a>
-
-        <div class="perfil-topo">
-            <div class="avatar">U</div>
-
-            <div class="menu-perfil">
-                <a href="meu perfil.html">Meu Perfil</a>
-                <a href="configurações.html">Configurações</a>
-                <a href="index.html">Sair</a>
-            </div>
+    <div class="perfil" id="perfilBtn">
+        <img id="avatarPerfil" src="https://via.placeholder.com/100">
+        <div class="menu-perfil" id="menuPerfil">
+            <a href="meu-perfil.html">Meu Perfil</a>
+            <a href="configuracoes.html">Configurações</a>
+            <a href="index.html">Sair</a>
         </div>
-    </nav>
+    </div>
 </header>
 
-<section class="hero">
-    <h2>Bem-vindo ao Caminho do Guerreiro</h2>
-    <p>
-        Aqui não se aprende só a lutar.  
-        Aqui se aprende a cair, levantar e respeitar o ringue.
-    </p>
-</section>
-
-<section class="content">
+<main>
     <div class="card">
-        <h3>Técnicas Básicas</h3>
-        <p>
-            Base firme, guarda alta e cotovelo afiado.  
-            Sem isso, não existe Muay Thai.
-        </p>
+        <h2>Bem-vindo</h2>
+        <p>Treino começa na disciplina. Sistema também.</p>
     </div>
+</main>
 
-    <div class="card">
-        <h3>Treinos Avançados</h3>
-        <p>
-            Condicionamento, resistência e mental forte.  
-            O corpo acompanha quando a mente manda.
-        </p>
-    </div>
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    <div class="card">
-        <h3>Disciplina</h3>
-        <p>
-            O respeito vem antes do golpe.  
-            Quem ignora isso, não dura no ringue.
-        </p>
-    </div>
-</section>
+const firebaseConfig = {
+  apiKey: "AIzaSyANsCPOUh_7A_7w3FVUILdyGxdO9wotPRk",
+  authDomain: "galego-site.firebaseapp.com",
+  projectId: "galego-site",
+  storageBucket: "galego-site.firebasestorage.app",
+  messagingSenderId: "647885603620",
+  appId: "1:647885603620:web:e929d7fc2e788e122369b1"
+};
 
-<footer>
-    Muay Thai © 2026 — O ringue não perdoa.
-</footer>
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// MENU PERFIL
+const perfilBtn = document.getElementById("perfilBtn");
+const menuPerfil = document.getElementById("menuPerfil");
+
+perfilBtn.addEventListener("click", () => {
+    menuPerfil.style.display =
+        menuPerfil.style.display === "block" ? "none" : "block";
+});
+
+// CARREGAR FOTO DO PERFIL
+async function carregarAvatar() {
+    const q = query(
+        collection(db, "usuarios"),
+        orderBy("atualizadoEm", "desc"),
+        limit(1)
+    );
+
+    const snapshot = await getDocs(q);
+
+    snapshot.forEach(doc => {
+        const dados = doc.data();
+        if (dados.fotoURL) {
+            document.getElementById("avatarPerfil").src = dados.fotoURL;
+        }
+    });
+}
+
+carregarAvatar();
+</script>
 
 </body>
 </html>
