@@ -1,94 +1,93 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Muay Thai | Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Muay Thai | Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+<style>
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
 
-        body {
-            background: #0f0f0f;
-            color: #fff;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+body{
+    background:#0f0f0f;
+    color:#fff;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
-        .login-box {
-            width: 100%;
-            max-width: 380px;
-            background: #111;
-            padding: 40px;
-            border-radius: 10px;
-            border: 1px solid #222;
-        }
+.login-box{
+    width:100%;
+    max-width:380px;
+    background:#111;
+    padding:40px;
+    border-radius:10px;
+    border:1px solid #222;
+}
 
-        h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #e63946;
-        }
+h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#e63946;
+}
 
-        label {
-            font-size: 13px;
-            color: #aaa;
-        }
+label{
+    font-size:13px;
+    color:#aaa;
+}
 
-        input {
-            width: 100%;
-            padding: 13px;
-            margin: 8px 0 20px;
-            background: #1c1c1c;
-            border: 1px solid #222;
-            border-radius: 6px;
-            color: #fff;
-        }
+input{
+    width:100%;
+    padding:13px;
+    margin:8px 0 20px;
+    background:#1c1c1c;
+    border:1px solid #222;
+    border-radius:6px;
+    color:#fff;
+}
 
-        input:focus {
-            outline: none;
-            border-color: #e63946;
-        }
+input:focus{
+    outline:none;
+    border-color:#e63946;
+}
 
-        button {
-            width: 100%;
-            padding: 14px;
-            background: #e63946;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            color: #fff;
-            cursor: pointer;
-        }
+button{
+    width:100%;
+    padding:14px;
+    background:#e63946;
+    border:none;
+    border-radius:6px;
+    font-weight:bold;
+    color:#fff;
+    cursor:pointer;
+}
 
-        button:hover {
-            background: #ff4d5a;
-        }
+button:hover{
+    background:#ff4d5a;
+}
 
-        .erro {
-            margin-top: 15px;
-            text-align: center;
-            color: #ff6b6b;
-            font-size: 13px;
-            display: none;
-        }
-    </style>
+.error{
+    margin-top:15px;
+    text-align:center;
+    color:#ff6b6b;
+    font-size:13px;
+    display:none;
+}
+</style>
 </head>
 
 <body>
 
 <div class="login-box">
     <h2>Entrar</h2>
-
     <form id="loginForm">
-        <label>Email</label>
+        <label>E-mail</label>
         <input type="email" id="email" required>
 
         <label>Senha</label>
@@ -96,43 +95,47 @@
 
         <button type="submit">Entrar</button>
     </form>
-
-    <div class="erro" id="erroMsg">Email ou senha inválidos</div>
+    <div class="error" id="erroMsg">E-mail ou senha inválidos</div>
 </div>
 
-<!-- FIREBASE -->
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyANsCPOUh_7A_7w3FVUILdyGxdO9wotPRk",
-        authDomain: "galego-site.firebaseapp.com",
-        projectId: "galego-site",
-        storageBucket: "galego-site.firebasestorage.app",
-        messagingSenderId: "647885603620",
-        appId: "1:647885603620:web:e929d7fc2e788e122369b1"
-    };
+const firebaseConfig = {
+  apiKey: "AIzaSyANsCPOUh_7A_7w3FVUILdyGxdO9wotPRk",
+  authDomain: "galego-site.firebaseapp.com",
+  projectId: "galego-site",
+  storageBucket: "galego-site.firebasestorage.app",
+  messagingSenderId: "647885603620",
+  appId: "1:647885603620:web:e929d7fc2e788e122369b1"
+};
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-    const form = document.getElementById("loginForm");
-    const erroMsg = document.getElementById("erroMsg");
+const form = document.getElementById("loginForm");
+const erroMsg = document.getElementById("erroMsg");
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
 
-        const email = document.getElementById("email").value;
-        const senha = document.getElementById("senha").value;
-
-        try {
-            await signInWithEmailAndPassword(auth, email, senha);
+    try {
+        // Tenta logar
+        await signInWithEmailAndPassword(auth, email, senha);
+        window.location.href = "inicio.html";
+    } catch (error) {
+        if(error.code === "auth/user-not-found"){
+            // Cria usuário se não existir
+            await createUserWithEmailAndPassword(auth, email, senha);
             window.location.href = "inicio.html";
-        } catch (error) {
+        } else {
             erroMsg.style.display = "block";
         }
-    });
+    }
+});
 </script>
 
 </body>
