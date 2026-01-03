@@ -34,16 +34,69 @@
             letter-spacing: 2px;
         }
 
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
         nav a {
             color: #fff;
             text-decoration: none;
-            margin-left: 20px;
+            margin-right: 20px;
             font-size: 14px;
             transition: 0.3s;
         }
 
         nav a:hover {
             color: #e63946;
+        }
+
+        /* PERFIL TOPO */
+        .perfil-topo {
+            position: relative;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #e63946;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .menu-perfil {
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 6px;
+            width: 160px;
+            display: none;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .menu-perfil a {
+            padding: 12px;
+            font-size: 14px;
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .menu-perfil a:hover {
+            background: #1c1c1c;
+            color: #e63946;
+        }
+
+        .perfil-topo:hover .menu-perfil {
+            display: flex;
         }
 
         /* HERO */
@@ -99,57 +152,6 @@
             line-height: 1.6;
         }
 
-        /* PERFIL */
-        .perfil {
-            padding: 50px 20px;
-            background: #111;
-            border-top: 2px solid #e63946;
-            text-align: center;
-        }
-
-        .perfil h2 {
-            margin-bottom: 30px;
-            color: #e63946;
-            letter-spacing: 1px;
-        }
-
-        .perfil-card {
-            max-width: 420px;
-            margin: auto;
-            background: #0f0f0f;
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid #222;
-            text-align: left;
-        }
-
-        .perfil-card p {
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        .progresso span {
-            font-size: 13px;
-            color: #aaa;
-        }
-
-        .barra {
-            width: 100%;
-            height: 10px;
-            background: #222;
-            border-radius: 5px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-
-        .barra-preenchida {
-            width: 35%;
-            height: 100%;
-            background: #e63946;
-        }
-
-        /* FOOTER */
         footer {
             text-align: center;
             padding: 20px;
@@ -164,11 +166,21 @@
 
 <header>
     <h1>MUAY THAI</h1>
+
     <nav>
         <a href="#">Início</a>
         <a href="#">Treinos</a>
         <a href="#">Técnicas</a>
-        <a href="#perfil">Perfil</a>
+
+        <div class="perfil-topo">
+            <div class="avatar">U</div>
+
+            <div class="menu-perfil">
+                <a href="#">Meu Perfil</a>
+                <a href="#">Configurações</a>
+                <a href="index.html">Sair</a>
+            </div>
+        </div>
     </nav>
 </header>
 
@@ -203,23 +215,6 @@
             O respeito vem antes do golpe.  
             Quem ignora isso, não dura no ringue.
         </p>
-    </div>
-</section>
-
-<section class="perfil" id="perfil">
-    <h2>Perfil do Guerreiro</h2>
-
-    <div class="perfil-card">
-        <p><strong>Nome:</strong> Usuário</p>
-        <p><strong>Email:</strong> usuario@email.com</p>
-        <p><strong>Nível:</strong> Iniciante</p>
-
-        <div class="progresso">
-            <span>Progresso no treino</span>
-            <div class="barra">
-                <div class="barra-preenchida"></div>
-            </div>
-        </div>
     </div>
 </section>
 
