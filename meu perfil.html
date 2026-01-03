@@ -41,10 +41,11 @@ header a {
 
 h2 {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     color: #e63946;
 }
 
+/* FOTO */
 .foto-perfil {
     display: flex;
     flex-direction: column;
@@ -53,16 +54,40 @@ h2 {
 }
 
 .foto-perfil img {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #e63946;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
-.foto-perfil input {
+/* BOTÃO FOTO */
+.upload-btn {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.upload-btn button {
+    background: #1c1c1c;
+    color: #fff;
+    padding: 10px 16px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
     font-size: 13px;
+}
+
+.upload-btn button:hover {
+    background: #262626;
+}
+
+.upload-btn input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
 }
 
 label {
@@ -80,7 +105,7 @@ input {
     color: #fff;
 }
 
-button {
+button.salvar {
     width: 100%;
     padding: 14px;
     background: #e63946;
@@ -91,7 +116,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+button.salvar:hover {
     background: #ff4d5a;
 }
 </style>
@@ -107,25 +132,28 @@ button:hover {
 <h2>Meu Perfil</h2>
 
 <div class="foto-perfil">
-    <img id="previewFoto" src="https://via.placeholder.com/120">
-    <input type="file" id="foto" accept="image/*">
+    <img id="previewFoto" src="https://via.placeholder.com/130">
+    <div class="upload-btn">
+        <button>Escolher foto</button>
+        <input type="file" id="foto" accept="image/*">
+    </div>
 </div>
 
 <form id="perfilForm">
     <label>Nome</label>
-    <input type="text" id="nome" required>
+    <input type="text" id="nome">
 
     <label>Email</label>
-    <input type="email" id="email" required>
+    <input type="email" id="email">
 
-    <button type="submit">Salvar alterações</button>
+    <button class="salvar" type="submit">Salvar alterações</button>
 </form>
 </div>
 
 <!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
 const firebaseConfig = {
@@ -144,27 +172,32 @@ const storage = getStorage(app);
 const fotoInput = document.getElementById("foto");
 const preview = document.getElementById("previewFoto");
 
+let fotoSelecionada = null;
+
+// PREVIEW
 fotoInput.addEventListener("change", () => {
-    const file = fotoInput.files[0];
-    if (file) preview.src = URL.createObjectURL(file);
+    fotoSelecionada = fotoInput.files[0];
+    if (fotoSelecionada) {
+        preview.src = URL.createObjectURL(fotoSelecionada);
+    }
 });
 
+// SALVAR PERFIL
 document.getElementById("perfilForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const nome = document.getElementById("nome").value;
     const email = document.getElementById("email").value;
-    const foto = fotoInput.files[0];
 
-    let fotoURL = "";
+    let fotoURL = preview.src;
 
-    if (foto) {
-        const fotoRef = ref(storage, `fotos/${Date.now()}_${foto.name}`);
-        await uploadBytes(fotoRef, foto);
+    if (fotoSelecionada) {
+        const fotoRef = ref(storage, "perfil/foto.jpg");
+        await uploadBytes(fotoRef, fotoSelecionada);
         fotoURL = await getDownloadURL(fotoRef);
     }
 
-    await addDoc(collection(db, "usuarios"), {
+    await setDoc(doc(db, "perfil", "principal"), {
         nome,
         email,
         fotoURL,
@@ -173,6 +206,21 @@ document.getElementById("perfilForm").addEventListener("submit", async (e) => {
 
     alert("Perfil salvo com sucesso!");
 });
+
+// CARREGAR PERFIL
+async function carregarPerfil() {
+    const perfilRef = doc(db, "perfil", "principal");
+    const snap = await getDoc(perfilRef);
+
+    if (snap.exists()) {
+        const dados = snap.data();
+        document.getElementById("nome").value = dados.nome || "";
+        document.getElementById("email").value = dados.email || "";
+        if (dados.fotoURL) preview.src = dados.fotoURL;
+    }
+}
+
+carregarPerfil();
 </script>
 
 </body>
