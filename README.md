@@ -14,9 +14,10 @@ Localização:<br>
 📍Av. Leopoldo de Passos Lima, 210<br>
 Jd. Santa Fé - Morro Doce, SP
 
-Estrutura do projeto: 💻 -HTML + JS
+Estrutura do projeto: 💻 - HTML + JS + CSS
 
-Acesso ao site: https://souzzx77.github.io/Galego/
+Acesso ao site: <br>
+https://souzzx77.github.io/Galego/
 
 index.html — página inicial - login do site<br> 
 style.css — estilos visuais<br> 
