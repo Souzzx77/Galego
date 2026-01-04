@@ -42,7 +42,7 @@ label{
     color:#aaa;
 }
 
-/* INPUTS SEM FICAR BRANCO */
+/* INPUTS */
 input{
     width:100%;
     padding:12px;
@@ -121,8 +121,9 @@ button{
 
         <label>Senha</label>
         <input type="password" id="senha" required>
-        <input type="button" value="Entrar" onclick="location.href='inicio.html'" class="btn-login">
-        
+
+        <!-- BOTÃO CORRETO (submit) -->
+        <button type="submit" class="btn-login">Entrar</button>
     </form>
 
     <!-- GOOGLE -->
@@ -166,8 +167,8 @@ form.addEventListener("submit", async (e) => {
     e.preventDefault();
     erroMsg.style.display = "none";
 
-    const email = email.value;
-    const senha = senha.value;
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
 
     try{
         await signInWithEmailAndPassword(auth, email, senha);
