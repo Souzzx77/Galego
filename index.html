@@ -72,6 +72,12 @@ button:hover{
     background:#ff4d5a;
 }
 
+.google-btn{
+    margin-top:10px;
+    background:#1c1c1c;
+    border:1px solid #333;
+}
+
 .error{
     margin-top:15px;
     text-align:center;
@@ -86,6 +92,7 @@ button:hover{
 
 <div class="login-box">
     <h2>Entrar</h2>
+
     <form id="loginForm">
         <label>E-mail</label>
         <input type="email" id="email" required>
@@ -95,12 +102,22 @@ button:hover{
 
         <button type="submit">Entrar</button>
     </form>
+
+    <!-- BOTÃO GOOGLE (ADICIONADO) -->
+    <button id="btnGoogle" class="google-btn">Entrar com Google</button>
+
     <div class="error" id="erroMsg">E-mail ou senha inválidos</div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { 
+    getAuth, 
+    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyANsCPOUh_7A_7w3FVUILdyGxdO9wotPRk",
@@ -113,27 +130,40 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 const form = document.getElementById("loginForm");
 const erroMsg = document.getElementById("erroMsg");
 
+/* LOGIN EMAIL/SENHA */
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    erroMsg.style.display = "none";
+
     const email = document.getElementById("email").value;
     const senha = document.getElementById("senha").value;
 
     try {
-        // Tenta logar
         await signInWithEmailAndPassword(auth, email, senha);
         window.location.href = "inicio.html";
     } catch (error) {
         if(error.code === "auth/user-not-found"){
-            // Cria usuário se não existir
             await createUserWithEmailAndPassword(auth, email, senha);
             window.location.href = "inicio.html";
         } else {
             erroMsg.style.display = "block";
         }
+    }
+});
+
+/* LOGIN GOOGLE */
+document.getElementById("btnGoogle").addEventListener("click", async () => {
+    try {
+        await signInWithPopup(auth, provider);
+        window.location.href = "inicio.html";
+    } catch (error) {
+        erroMsg.textContent = "Erro ao entrar com Google";
+        erroMsg.style.display = "block";
     }
 });
 </script>
