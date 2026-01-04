@@ -1,6 +1,7 @@
 Caminho do Guerreiro - Souzzx77
 
-Site dedicado ao ensino do Muai Thay com o instrutor Lucas Monteiro, mais conhecido como Galego.
+Site dedicado ao ensino do Muai Thay com o<br>
+instrutor Lucas Monteiro, mais conhecido como Galego.
 
 Sobre o professor:🥊
 
