@@ -44,38 +44,59 @@ label{
 
 input{
     width:100%;
-    padding:13px;
-    margin:8px 0 20px;
-    background:#1c1c1c;
-    border:1px solid #222;
+    padding:12px;
+    margin:8px 0 20px 0;
+    border:none;
     border-radius:6px;
+    background:#222;
     color:#fff;
+    border:1px solid #222;
+    
 }
 
 input:focus{
     outline:none;
-    border-color:#e63946;
+
 }
 
 button{
     width:100%;
     padding:14px;
-    background:#e63946;
     border:none;
     border-radius:6px;
     font-weight:bold;
-    color:#fff;
     cursor:pointer;
 }
 
-button:hover{
-    background:#ff4d5a;
+/* BOTÃO PADRÃO */
+.btn-login{
+    background:#e63946;
+    color:#fff;
 }
 
+.btn-login:hover{
+    background:#be2835;
+}
+
+/* BOTÃO GOOGLE */
 .google-btn{
-    margin-top:10px;
-    background:#1c1c1c;
-    border:1px solid #333;
+    margin-top:12px;
+    background:#fff;
+    color:#000;
+    border:1px solid #ddd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+}
+
+.google-btn img{
+    width:18px;
+    height:18px;
+}
+
+.google-btn:hover{
+    background:#f2f2f2;
 }
 
 .error{
@@ -100,11 +121,14 @@ button:hover{
         <label>Senha</label>
         <input type="password" id="senha" required>
 
-        <button type="submit">Entrar</button>
+        <button type="submit" class="btn-login">Entrar</button>
     </form>
 
-    <!-- BOTÃO GOOGLE (ADICIONADO) -->
-    <button id="btnGoogle" class="google-btn">Entrar com Google</button>
+    <!-- GOOGLE -->
+    <button id="btnGoogle" class="google-btn">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+        Entrar com Google
+    </button>
 
     <div class="error" id="erroMsg">E-mail ou senha inválidos</div>
 </div>
@@ -135,7 +159,7 @@ const provider = new GoogleAuthProvider();
 const form = document.getElementById("loginForm");
 const erroMsg = document.getElementById("erroMsg");
 
-/* LOGIN EMAIL/SENHA */
+/* EMAIL + SENHA */
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
     erroMsg.style.display = "none";
@@ -156,7 +180,7 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
-/* LOGIN GOOGLE */
+/* GOOGLE */
 document.getElementById("btnGoogle").addEventListener("click", async () => {
     try {
         await signInWithPopup(auth, provider);
