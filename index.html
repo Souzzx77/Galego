@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -42,21 +42,22 @@ label{
     color:#aaa;
 }
 
+/* INPUTS SEM FICAR BRANCO */
 input{
     width:100%;
     padding:12px;
-    margin:8px 0 20px 0;
-    border:none;
-    border-radius:6px;
+    margin:8px 0 20px;
     background:#222;
     color:#fff;
     border:1px solid #222;
-    
+    border-radius:6px;
 }
 
 input:focus{
     outline:none;
-
+    background:#222;
+    color:#fff;
+    border-color:#e63946;
 }
 
 button{
@@ -125,20 +126,19 @@ button{
     </form>
 
     <!-- GOOGLE -->
-<button id="googleLogin" class="google-btn">
-  <img src="https://www.svgrepo.com/show/475656/google-color.svg">
-  Entrar com Google
-</button>
+    <button type="button" id="googleLogin" class="google-btn">
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg">
+        Entrar com Google
+    </button>
 
-
-    <div class="error" id="erroMsg">E-mail ou senha inválidos</div>
+    <div class="error" id="erroMsg">Erro ao entrar</div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { 
-  getAuth, 
-  signInWithEmailAndPassword, 
+import {
+  getAuth,
+  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup
@@ -159,34 +159,36 @@ const provider = new GoogleAuthProvider();
 
 const form = document.getElementById("loginForm");
 const erroMsg = document.getElementById("erroMsg");
+const googleBtn = document.getElementById("googleLogin");
 
 /* EMAIL + SENHA */
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
     erroMsg.style.display = "none";
 
-    const email = document.getElementById("email").value;
-    const senha = document.getElementById("senha").value;
+    const email = email.value;
+    const senha = senha.value;
 
-    try {
+    try{
         await signInWithEmailAndPassword(auth, email, senha);
         window.location.href = "inicio.html";
-    } catch (error) {
+    }catch(error){
         if(error.code === "auth/user-not-found"){
             await createUserWithEmailAndPassword(auth, email, senha);
             window.location.href = "inicio.html";
-        } else {
+        }else{
+            erroMsg.textContent = "E-mail ou senha inválidos";
             erroMsg.style.display = "block";
         }
     }
 });
 
 /* GOOGLE */
-document.getElementById("btnGoogle").addEventListener("click", async () => {
-    try {
+googleBtn.addEventListener("click", async () => {
+    try{
         await signInWithPopup(auth, provider);
         window.location.href = "inicio.html";
-    } catch (error) {
+    }catch(error){
         erroMsg.textContent = "Erro ao entrar com Google";
         erroMsg.style.display = "block";
     }
