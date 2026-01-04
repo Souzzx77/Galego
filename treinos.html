@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Muay Thai | Treinos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#0f0f0f;
+    color:#fff;
+}
+
+/* HEADER */
+header{
+    background:#111;
+    padding:20px;
+    border-bottom:2px solid #e63946;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1{
+    color:#e63946;
+    font-size:20px;
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#e63946;
+}
+
+/* CONTEÚDO */
+.container{
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+.container h2{
+    margin-bottom:10px;
+    color:#e63946;
+}
+
+.container p{
+    color:#aaa;
+    font-size:14px;
+    margin-bottom:30px;
+}
+
+/* TREINOS */
+.treinos{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:20px;
+}
+
+.treino-card{
+    background:#111;
+    border:1px solid #222;
+    border-radius:8px;
+    padding:20px;
+    transition:0.3s;
+}
+
+.treino-card:hover{
+    border-color:#e63946;
+    transform:translateY(-4px);
+}
+
+.treino-card h3{
+    color:#e63946;
+    margin-bottom:10px;
+}
+
+.treino-card ul{
+    list-style:none;
+}
+
+.treino-card li{
+    font-size:14px;
+    color:#ccc;
+    margin-bottom:6px;
+}
+
+/* TAG */
+.tag{
+    display:inline-block;
+    margin-top:10px;
+    padding:4px 10px;
+    font-size:11px;
+    border-radius:20px;
+    background:#1c1c1c;
+    color:#aaa;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+    font-size:12px;
+    color:#666;
+    border-top:1px solid #222;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>MUAY THAI</h1>
+    <nav>
+        <a href="inicio.html">Início</a>
+        <a href="treinos.html">Treinos</a>
+        <a href="meu-perfil.html">Perfil</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>Treinos</h2>
+    <p>Não é sobre força bruta. É técnica, repetição e disciplina.</p>
+
+    <div class="treinos">
+
+        <div class="treino-card">
+            <h3>Treino Básico</h3>
+            <ul>
+                <li>✔ Base e postura</li>
+                <li>✔ Guarda correta</li>
+                <li>✔ Jab e direto</li>
+                <li>✔ Defesa simples</li>
+            </ul>
+            <button class="tag" onclick="window.location.href='https:/youtube.com'">Iniciante</button>
+        </div>
+
+        <div class="treino-card">
+            <h3>Condicionamento</h3>
+            <ul>
+                <li>✔ Corda</li>
+                <li>✔ Abdominais</li>
+                <li>✔ Flexões</li>
+                <li>✔ Resistência</li>
+            </ul>
+            <button class="tag" onclick="window.location.href='https:/youtube.com'">Físico</button>
+        </div>
+
+        <div class="treino-card">
+            <h3>Técnicas de Pernas</h3>
+            <ul>
+                <li>✔ Chute frontal</li>
+                <li>✔ Chute circular</li>
+                <li>✔ Defesa de chute</li>
+                <li>✔ Contra-ataque</li>
+            </ul>
+            <button class="tag" onclick="window.location.href='https:/youtube.com'">Intermediário</button>
+        </div>
+
+        <div class="treino-card">
+            <h3>Clinch</h3>
+            <ul>
+                <li>✔ Controle de cabeça</li>
+                <li>✔ Joelhadas</li>
+                <li>✔ Equilíbrio</li>
+                <li>✔ Quebra de base</li>
+            </ul>
+            <button class="tag" onclick="window.location.href='https:/youtube.com'">Avançado</button>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    Muay Thai © 2026 — Treinar é resistir. Evoluir é insistir.
+</footer>
+
+</body>
+</html>
