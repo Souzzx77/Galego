@@ -122,61 +122,81 @@ button:hover{
     <input type="text" id="nome">
 
     <label>Email</label>
-    <input type="email" id="email">
+    <input type="email" id="email" disabled>
 
     <button type="submit">Salvar</button>
 </form>
 </div>
 
 <script type="module">
-import { db, storage } from "./firebase.js";
-import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyANsCPOUh_7A_7w3FVUILdyGxdO9wotPRk",
+  authDomain: "galego-site.firebaseapp.com",
+  projectId: "galego-site",
+  storageBucket: "galego-site.firebasestorage.app",
+  messagingSenderId: "647885603620",
+  appId: "1:647885603620:web:e929d7fc2e788e122369b1"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
 const fotoInput = document.getElementById("foto");
 const preview = document.getElementById("preview");
 let fotoArquivo = null;
+let uid = null;
 
 fotoInput.addEventListener("change", () => {
     fotoArquivo = fotoInput.files[0];
     if (fotoArquivo) preview.src = URL.createObjectURL(fotoArquivo);
 });
 
+onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    uid = user.uid;
+    document.getElementById("email").value = user.email;
+
+    const snap = await getDoc(doc(db, "usuarios", uid));
+    if (snap.exists()) {
+        const d = snap.data();
+        document.getElementById("nome").value = d.nome || "";
+        if (d.fotoURL) preview.src = d.fotoURL;
+    }
+});
+
 document.getElementById("form").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const nome = document.getElementById("nome").value;
-    const email = document.getElementById("email").value;
+    if (!uid) return;
 
     let fotoURL = preview.src;
 
     if (fotoArquivo) {
-        const fotoRef = ref(storage, "perfil/foto.jpg");
+        const fotoRef = ref(storage, `usuarios/${uid}/perfil.jpg`);
         await uploadBytes(fotoRef, fotoArquivo);
         fotoURL = await getDownloadURL(fotoRef);
     }
 
-    await setDoc(doc(db, "perfil", "principal"), {
-        nome,
-        email,
+    await setDoc(doc(db, "usuarios", uid), {
+        nome: document.getElementById("nome").value,
+        email: document.getElementById("email").value,
         fotoURL,
         atualizadoEm: new Date().toISOString()
     });
 
-    alert("Perfil salvo com sucesso");
+    alert("Perfil salvo com sucesso!");
 });
-
-async function carregarPerfil(){
-    const snap = await getDoc(doc(db,"perfil","principal"));
-    if(snap.exists()){
-        const d = snap.data();
-        document.getElementById("nome").value = d.nome || "";
-        document.getElementById("email").value = d.email || "";
-        if(d.fotoURL) preview.src = d.fotoURL;
-    }
-}
-
-carregarPerfil();
 </script>
 
 </body>
