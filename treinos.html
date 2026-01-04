@@ -33,6 +33,15 @@ header h1{
     font-size:20px;
 }
 
+    footer {
+      padding: 20px 40px;
+      border-top: 1px solid #222;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
 nav a{
     color:#fff;
     text-decoration:none;
@@ -109,13 +118,36 @@ nav a:hover{
 }
 
 /* FOOTER */
+/* FOOTER */
 footer{
-    text-align:center;
-    padding:20px;
-    margin-top:40px;
+    border-top:1px solid #222;
+    padding:16px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     font-size:12px;
     color:#666;
-    border-top:1px solid #222;
+}
+
+footer .social{
+    display:flex;
+    gap:14px;
+}
+
+footer .social a{
+    display:flex;
+    align-items:center;
+}
+
+footer .social img{
+    width:18px;
+    height:18px;
+    filter:invert(60%);
+    transition:0.3s;
+}
+
+footer .social img:hover{
+    filter:invert(45%) sepia(100%) saturate(500%) hue-rotate(-10deg);
 }
 </style>
 </head>
@@ -185,8 +217,23 @@ footer{
 </div>
 
 <footer>
-    Muay Thai © 2026 — Treinar é resistir. Evoluir é insistir.
+    <span>© 2025 • Área do Aluno — Muay Thai</span>
+
+    <div class="social">
+        <a href="https://www.instagram.com/galego_mma/" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+        </a>
+
+        <a href="https://www.tiktok.com/@galego_mma" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg">
+        </a>
+
+        <a href="https://www.youtube.com/@galegomma" target="_blank">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg">
+        </a>
+    </div>
 </footer>
+
 
 </body>
 </html>
