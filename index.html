@@ -167,6 +167,19 @@ form.addEventListener("submit", async (e) => {
 
     const email = document.getElementById("email").value;
     const senha = document.getElementById("senha").value;
+    const googleBtn = document.getElementById("googleLogin");
+
+googleBtn.addEventListener("click", async () => {
+  try {
+    await signInWithPopup(auth, provider);
+    window.location.href = "inicio.html";
+  } catch (error) {
+    console.error(error);
+    erroMsg.style.display = "block";
+    erroMsg.innerText = "Erro ao entrar com Google";
+  }
+});
+
 
     try {
         await signInWithEmailAndPassword(auth, email, senha);
