@@ -4,14 +4,25 @@ Site dedicado ao ensino do Muai Thay com o instrutor Lucas Monteiro, mais conhec
 
 Sobre o professor:🥊
 
-• Graduação: Prajied Azul Escuro🔹 • 7 Anos de Experiência como lutador • 2 Anos como professor • Parte da equipe: Grego Fight Team
+• Graduação: Prajied Azul Escuro🔹<br> 
+• 7 Anos de Experiência como lutador<br>
+• 2 Anos como professor<br>
+• Parte da equipe: Grego Fight Team<br>
 
-Localização:📍Av. Leopoldo de Passos Lima, 210 Jd. Santa Fé - Morro Doce, SP
+Localização:<br>
+📍Av. Leopoldo de Passos Lima, 210<br>
+Jd. Santa Fé - Morro Doce, SP
 
 Estrutura do projeto: 💻 -HTML + JS
 
 Acesso ao site: https://souzzx77.github.io/Galego/
 
-index.html — página inicial - login do site style.css — estilos visuais script.js — interações e funcionalidades Programação do site ainda em andamento.⚠️
+index.html — página inicial - login do site<br> 
+style.css — estilos visuais<br> 
+script.js — interações e funcionalidades<br>
 
-Autor: Vinicios Santana IG: @souzzx_77 📧Email: Viniciossantanazr@gmail.com
+Programação do site ainda em andamento.⚠️
+
+Autor: Vinicios Santana<br>
+IG: @souzzx_77<br> 
+📧Email: Viniciossantanazr@gmail.com
